@@ -1,0 +1,1 @@
+export const moneyFormat = (value) => `$ ${new Intl.NumberFormat().format(value)}`
