@@ -1,6 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class Categories extends React.Component {
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import Radio from '@material-ui/core/Radio'
+import Button from '@material-ui/core/Button'
+
+class Categories extends React.Component {
   constructor (props)  {
     super(props)
     this.state = {
@@ -12,9 +21,8 @@ export default class Categories extends React.Component {
     const { category } = this.state
     e.preventDefault()
     if (category === null) return
-
     this.props.categorySelected(category)
-    // this.setState({category: null})
+    this.setState({category: null})
   }
 
   submitCategory = (e) => {
@@ -22,33 +30,47 @@ export default class Categories extends React.Component {
     this.setState({category})
   }
 
-  render () {
-    const {category} = this.state
+  renderOptions ([value, text]) {
     return (
-      <div>
-        <h2>1. Categoría</h2>
-        <form onSubmit={this.handleDefault}>
-          <label>
-            <input type="radio" name="gender" value="cielo" onChange={this.submitCategory} checked={category === 'cielo'} />
-            Cielo raso
-          </label>
-          <label>
-            <input type="radio" name="gender" value="tejas" onChange={this.submitCategory} checked={category === 'tejas'} />
-            Tejas
-          </label>
-          <label>
-            <input type="radio" name="gender" value="pared" onChange={this.submitCategory} checked={category === 'pared'} />
-            Pared
-          </label>
-          <label>
-            <input type="radio" name="gender" value="piso" onChange={this.submitCategory} checked={category === 'piso'} />
-            Piso
-          </label>
+      <FormControlLabel key={value}
+        value={value}
+        control={<Radio
+        />}
+        label={text}
+      />
+    )
+  }
 
-          <button> Seleccionar</button>
-
-        </form>
-      </div>
+  render () {
+    const options = [
+      ['cielo', 'Cielo raso'],
+      ['tejas', 'Tejas'],
+      ['pared', 'Pared'],
+      ['piso', 'Piso']
+    ]
+    return (
+      <ExpansionPanel expanded={this.props.category===''}>
+        <ExpansionPanelSummary>1. Categoría {this.props.category}</ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <form onSubmit={this.handleDefault}>
+            <RadioGroup
+              row
+              name="category"
+              value={this.state.category}
+              onChange={this.submitCategory}
+            >
+            {options.map(this.renderOptions)}
+            </RadioGroup>
+            <Button variant="contained" color="primary" size="small" type='submit'> Seleccionar</Button>
+          </form>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  category: state.pricingInput.category
+})
+
+export default connect(mapStateToProps)(Categories)

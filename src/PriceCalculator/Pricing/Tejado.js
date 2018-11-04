@@ -1,101 +1,101 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import TableFooter from '@material-ui/core/TableFooter'
+
+import PricingTableCell from './PricingTableCell'
 
 import { roofPricing, getTotal } from '../../modules/roofCalculator'
 import { moneyFormat } from '../../modules/formatting'
-import pvc_logo from '../../static/images/pvc_logo.png'
-import tejas_color from '../../static/images/tejas_color.png'
-import tejas_caballetes from '../../static/images/tejas_caballetes.png'
-import tejas_tornillos from '../../static/images/tejas_tornillos.png'
 
-export default class TejadoPricing extends React.Component {
-  constructor (props) {
-    super(props)
-    
-    const {cali: {tejado}} = precios // eslint-disable-line 
-    this.state = {
-      ...tejado,
-      pricing: {
-        tejas: {cantidad:0, costo: 0},
-        caballete: {cantidad:0, costo: 0},
-        tornillo: {cantidad:0, costo: 0},
-      }
-    } 
-  }
+import pvc_icon from '../../static/images/pvc_icon.png'
 
-  componentDidMount () {
-    const {teja, caballete, tornillo} = this.state
-    const {width, depth, waterfalls} = this.props.volume
-
-    const pricing = roofPricing(teja, caballete, tornillo)(width, depth, waterfalls)
-    this.setState({pricing})
-  }
-
+class TejadoPricing extends React.Component {
   renderTableHeader () {
     return (
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Precio unitario</th>
-          <th>Cantidad</th>
-          <th>Costo</th>
-        </tr>
-      </thead>
+      <TableHead>
+        <TableRow>
+          <PricingTableCell>Producto</PricingTableCell>
+          <PricingTableCell>Precio unitario</PricingTableCell>
+          <PricingTableCell>Cantidad</PricingTableCell>
+          <PricingTableCell>Costo</PricingTableCell>
+        </TableRow>
+      </TableHead>
     )
   }
 
-  renderTableContent () {
-    const {tejas, caballete, tornillo} = this.state.pricing
+  renderTableContent (pricing) {
+    const {tejas, caballete, tornillo} = pricing
+    const bodystyle = {background: `url(${pvc_icon})`}
     return (
-      <tbody>
-        <tr>
-          <td>Teja 5.8 x 1.13m</td>
-          <td>$ 155,000</td>
-          <td>{tejas.cantidad}</td>
-          <td>{moneyFormat(tejas.costo)}</td>
-        </tr>
-        <tr>
-          <td>Caballete 1.13 m de ancho</td>
-          <td>$ 22,500</td>
-          <td>{caballete.cantidad}</td>
-          <td>{moneyFormat(caballete.costo)}</td>
-        </tr>
-        <tr>
-          <td>Tornillo especial</td>
-          <td>$ 1,500</td>
-          <td>{tornillo.cantidad}</td>
-          <td>{moneyFormat(tornillo.costo)}</td>
-        </tr>
-      </tbody>
+      <TableBody style={bodystyle}>
+        <TableRow>
+          <PricingTableCell>Teja 5.8 x 1.13m</PricingTableCell>
+          <PricingTableCell>$ 155,000</PricingTableCell>
+          <PricingTableCell>{tejas.cantidad}</PricingTableCell>
+          <PricingTableCell>{moneyFormat(tejas.costo)}</PricingTableCell>
+        </TableRow>
+        <TableRow>
+          <PricingTableCell>Caballete 1.13 m de ancho</PricingTableCell>
+          <PricingTableCell>$ 22,500</PricingTableCell>
+          <PricingTableCell>{caballete.cantidad}</PricingTableCell>
+          <PricingTableCell>{moneyFormat(caballete.costo)}</PricingTableCell>
+        </TableRow>
+        <TableRow>
+          <PricingTableCell>Tornillo especial</PricingTableCell>
+          <PricingTableCell>$ 1,500</PricingTableCell>
+          <PricingTableCell>{tornillo.cantidad}</PricingTableCell>
+          <PricingTableCell>{moneyFormat(tornillo.costo)}</PricingTableCell>
+        </TableRow>
+      </TableBody>
     )
   }
 
-  renderTotals() {
-    const total = getTotal(this.state.pricing)
+  renderTotals(pricing) {
+    const total = getTotal(pricing)
     return (
-      <tfoot>
-        <tr>
-          <td></td><td></td>
-          <td>Total</td>
-          <td>{moneyFormat(total)}</td>
-        </tr>
-      </tfoot>
+      <TableFooter>
+        <TableRow>
+          <PricingTableCell></PricingTableCell><PricingTableCell></PricingTableCell>
+          <PricingTableCell>Total</PricingTableCell>
+          <PricingTableCell>{moneyFormat(total)}</PricingTableCell>
+        </TableRow>
+      </TableFooter>
     )
   }
 
   render () {
     if (this.props.category !== 'tejas') return null
+
+    const {width, depth, waterfalls, unitPrices} = this.props
+    const {teja, caballete, tornillo} = unitPrices
+    const pricing = roofPricing(teja, caballete, tornillo)(width, depth, waterfalls)
+
     return (
       <div>
-        <img src={pvc_logo}  alt='pvc_logo' />
-        <table>
+        <Table>
           {this.renderTableHeader()}
-          {this.renderTableContent()}
-          {this.renderTotals()}
-        </table>
-        <img src={tejas_color} alt='tejas_color' />
-        <img src={tejas_caballetes} alt='tejas_caballetes' />
-        <img src={tejas_tornillos}  alt='tejas_tornillos' />
+          {this.renderTableContent(pricing)}
+          {this.renderTotals(pricing)}
+        </Table>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  const { category, width, depth, waterfalls } = state.pricingInput
+  return {
+    category,
+    width,
+    depth,
+    waterfalls,
+    unitPrices: state.unitPrices[state.generalInfo.city]['tejado'],
+  }
+}
+
+export default connect(mapStateToProps)(TejadoPricing)
