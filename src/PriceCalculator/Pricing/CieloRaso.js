@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 
 import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
+// import TableBody from '@material-ui/core/TableBody'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
@@ -130,7 +130,7 @@ class CieloRasoPricing extends React.Component {
       torniLami
     )(width, depth)
 
-    const imgStyle = {width: '250px'}
+    // const imgStyle = {width: '250px'}
     return (
       <div>
         <Table>
@@ -155,7 +155,7 @@ const mapStateToProps = (state) => {
     category,
     width,
     depth,
-    unitPrices: state.unitPrices[state.generalInfo.city]['cielo'],
+    unitPrices: state.unitPrices['cielo'],
   }
 }
 

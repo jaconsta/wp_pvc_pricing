@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
     width,
     depth,
     waterfalls,
-    unitPrices: state.unitPrices[state.generalInfo.city]['tejado'],
+    unitPrices: state.unitPrices['tejado'],
   }
 }
 

@@ -8,7 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 
-import { setCity } from './actions'
+import { setCity, getPrices } from './actions'
 
 
 const defaultState = {
@@ -40,6 +40,7 @@ class Login extends React.Component {
     }
 
     this.props.dispatch(setCity(currentUser))
+    this.props.dispatch(getPrices(currentUser))
     this.setState(defaultState)
   }
 

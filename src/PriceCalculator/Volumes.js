@@ -26,6 +26,7 @@ class Volumes extends React.Component {
   parseVolumeForms = () => {
     return ['width', 'depth', 'waterfalls'].reduce((orig, prop) => {
       const propNumber = Number(this.state[prop])
+      // eslint-disable-next-line no-throw-literal
       if (Number.isNaN(propNumber)) throw `Invalid field: ${prop}`
       return Object.assign(orig, {[prop]: propNumber})
     }, {})

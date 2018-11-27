@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
     category,
     width,
     depth,
-    unitPrices: state.unitPrices[state.generalInfo.city]['piso'],
+    unitPrices: state.unitPrices['piso'],
   }
 }
 

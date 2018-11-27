@@ -10,7 +10,7 @@ import {PricingTableCell, PricingTableBody} from './style'
 import { wallPricing } from '../../modules/wallCalculator'
 import { moneyFormat } from '../../modules/formatting'
 
-import pared_bg from '../../static/images/pared_bg.png'
+// import pared_bg from '../../static/images/pared_bg.png'
 import pared_chart from '../../static/images/pared_chart.png'
 
 
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => {
     category,
     width,
     depth,
-    unitPrices: state.unitPrices[state.generalInfo.city]['pared'],
+    unitPrices: state.unitPrices['pared'],
   }
 }
 

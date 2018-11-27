@@ -1,0 +1,104 @@
+{
+	"prices": {
+		"cali": {
+			"tejado": {
+				"teja": 155000,
+				"caballete": 22500,
+				"tornillo": 1500
+			},
+			"pared_3d": {
+				"metros": 60000
+			},
+			"pared_pvc": {
+				"metros": 26000
+			},
+			"cielo": {
+				"lamina": 30000,
+				"perimetral": 14000,
+				"vigueta": 2700,
+				"omega": 2700,
+				"angulo": 1700,
+				"torniStruct": 40,
+				"torniLami": 35
+			},
+			"piso": {
+				"metros": 11313
+			}
+		},
+		"cartagena": {
+			"tejado": {
+				"teja": 160000,
+				"caballete": 24000,
+				"tornillo": 1500
+			},
+			"pared_pvc": {
+				"metros": 25000
+			},
+			"pared_3d": {
+				"metros": 60000
+			},
+			"cielo": {
+				"lamina": 36750,
+				"perimetral": 17000,
+				"vigueta": 3000,
+				"omega": 3000,
+				"angulo": 1950,
+				"torniStruct": 35,
+				"torniLami": 30
+			},
+			"piso": {
+				"metros": 56000
+			}
+		},
+		"sincelejo": {
+			"tejado": {
+				"teja": 160000,
+				"caballete": 24000,
+				"tornillo": 1500
+			},
+			"pared_pvc": {
+				"metros": 26000
+			},
+			"pared_3d": {
+				"metros": 60000
+			},
+			"cielo": {
+				"lamina": 34000,
+				"perimetral": 17000,
+				"vigueta": 3000,
+				"omega": 3000,
+				"angulo": 1950,
+				"torniStruct": 35,
+				"torniLami": 30
+			},
+			"piso": {
+				"metros": 56000
+			}
+		},
+		"turbaco": {
+			"tejado": {
+				"teja": 160000,
+				"caballete": 24000,
+				"tornillo": 1500
+			},
+			"pared_pvc": {
+				"metros": 25000
+			},
+			"pared_3d": {
+				"metros": 60000
+			},
+			"cielo": {
+				"lamina": 36750,
+				"perimetral": 17000,
+				"vigueta": 3000,
+				"omega": 3000,
+				"angulo": 1950,
+				"torniStruct": 35,
+				"torniLami": 30
+			},
+			"piso": {
+				"metros": 56000
+			}
+		}
+	}
+}
