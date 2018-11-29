@@ -52,7 +52,7 @@ class Login extends React.Component {
 
   render () {
     return (
-      <div style={{paddingTop: '30px', paddingLeft: '50px', width: '500px'}}>
+      <div style={{paddingTop: '30px', paddingLeft: '50px', maxWidth: '500px', width: '100%'}}>
         <Paper>
           <h1 style={{paddingTop: '15px', paddingLeft: '10px'}}>Ingresa tus credenciales </h1>
           <form

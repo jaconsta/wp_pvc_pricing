@@ -11,7 +11,7 @@ export default async () => {
   const pricingAsImage = content.toDataURL('image/png')
   doc.addImage(
     pricingAsImage,
-    'PNG', 10, 10
+    'PNG', 10, 10, 200, 260
   )
   doc.save('myPricing.pdf')
 }

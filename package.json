@@ -2,6 +2,7 @@
   "name": "pvc_princing",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://jaconsta.com/jaconsta_web/public/pvc_cotiza/",
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "firebase": "^5.5.9",
